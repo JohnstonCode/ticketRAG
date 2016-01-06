@@ -12,49 +12,26 @@
             <header>
                 <a href="settings.php">Settings</a>
                 Filter: <select>
-                    <option value="test">Test</option>
+                    <option value="all">All</option>
                 </select>
             </header>
-            <section>
-                <form action="upload.php" method="post" enctype="multipart/form-data">
-                    Select NOC report: <input type="file" name="fileToUpload" id="fileToUpload">
-                    <select>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                    </select></br>
-                    <input type="submit" value="Upload" name="submit">
-                </form>
-            </section>
-            <table border="1" style="width:100%">
-                <th>4PM Report</th>
-                <tr>
-                    <th>Pool</th>
-                    <th>Date</th>
-                    <th>Age</th>
-                </tr>
-            </table>
+           <?php
+            $row = 1;
+            if (($handle = fopen('uploads/OldestTicketReport.csv', 'r')) !== FALSE)
+            {
+                echo '<table style="width:100%">';
+            
+                // Get the rest
+                while (($data = fgetcsv($handle, 1000, ',')) !== FALSE)
+                {
+                    echo '<tr><td>'.implode('</td><td>', $data).'</td></tr>';
+                }
+                fclose($handle);
+                echo '</table>';
+            }
+            ?>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="scripts/main.js"></script>
     </body>
 </html>
