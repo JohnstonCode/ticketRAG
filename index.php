@@ -16,19 +16,11 @@
                 </select>
             </header>
            <?php
-            $row = 1;
-            if (($handle = fopen('uploads/OldestTicketReport.csv', 'r')) !== FALSE)
-            {
-                echo '<table style="width:100%">';
             
-                // Get the rest
-                while (($data = fgetcsv($handle, 1000, ',')) !== FALSE)
-                {
-                    echo '<tr><td>'.implode('</td><td>', $data).'</td></tr>';
-                }
-                fclose($handle);
-                echo '</table>';
-            }
+            $csv = array_map('str_getcsv', file('uploads/OldestTicketReport.csv'));
+            
+            var_dump($csv);
+            
             ?>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
