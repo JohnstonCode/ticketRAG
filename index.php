@@ -21,6 +21,25 @@
             
             var_dump($csv);
             
+            $dest = array();
+
+            $startValue = 'Oldest ticket report PN';
+            $endValue = 'Oldest ticket report MAAF';
+            
+            $startIndex = 0;
+            foreach ( $csv as $index => $value ) {
+                if ( $value[0] === $startValue ) {
+                    $startIndex = $index;
+                } else
+                if ( $value[0] === $endValue ) {
+                    $dest[] = array_slice($csv, $startIndex, $index - $startIndex + 1);
+                }
+            }
+            
+            print_r($dest);
+            
+            
+            
             ?>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
