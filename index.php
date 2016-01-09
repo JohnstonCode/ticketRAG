@@ -19,9 +19,10 @@
             
             $csv = array_map('str_getcsv', file('uploads/OldestTicketReport.csv'));
             
-            var_dump($csv);
+            //print_r($csv);
             
-            $dest = array();
+            $PN = array();
+            $JLP = array();
 
             $startValue = 'Oldest ticket report PN';
             $endValue = 'Oldest ticket report MAAF';
@@ -32,12 +33,10 @@
                     $startIndex = $index;
                 } else
                 if ( $value[0] === $endValue ) {
-                    $dest[] = array_slice($csv, $startIndex, $index - $startIndex + 1);
+                    $PN[] = array_slice($csv, $startIndex + 2, $index - $startIndex - 3);
+                    $JLP = array_slice($csv, $index + 5);
                 }
             }
-            
-            print_r($dest);
-            
             
             
             ?>
