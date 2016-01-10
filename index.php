@@ -38,6 +38,31 @@
                 }
             }
             
+            $PN = $PN[0];
+            
+            //print_r($PN);
+
+            // Create connection
+            $conn = new mysqli('localhost', 'root', '', 'rag');
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            } 
+             
+            for($i = 0; $i < count($PN); $i++){
+                $sql = "INSERT INTO pntickets (pool, ticket_id, last_touched) 
+                VALUES('".$PN[$i][0]."', '".$PN[$i][1]."', '".$PN[$i][2]."')";
+            
+            }
+            
+            if ($conn->query($sql) === TRUE) {
+               echo "New record created successfully";
+            } else {
+               echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+            
+            $conn->close();
+            
             
             ?>
         </div>
