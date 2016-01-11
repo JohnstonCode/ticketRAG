@@ -36,7 +36,7 @@
                     <option value="22">22</option>
                     <option value="23">23</option>
                     <option value="24">24</option>
-                </select></br>
+                </select>
                 <input type="submit" value="Upload" name="submit">
             </form>
         </section>
@@ -46,7 +46,8 @@
                 <input type="submit" value="Create Filter"/>
             </form>
         </section>
-        <table width="100%">
+        <form>
+            <table width="100%">
                 <thead>
                     <tr>
                         <td class="main-table-header">Filter Settings</td>
@@ -67,5 +68,7 @@
                     </tr>
                 </tbody>
             </table>
+            <input type="submit" value="Update"/>
+        </form>
     </body>
 </html>
