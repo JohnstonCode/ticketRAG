@@ -10,6 +10,22 @@ if($conn->connect_error)
 $PNQuery = $conn->query('SELECT * FROM pntickets');
 $JLPQuery = $conn->query('SELECT * FROM jlptickets');
 
+function hoursDiff($ticketAge)
+{
+    $timeNow = date('Y-m-d h:m:s');
+    
+    $ticketAge = strtotime($ticketAge);
+    $timeNow = strtotime($timeNow);
+    
+    $diff = $timeNow - $ticketAge;
+    
+    $hours = $diff / 60 / 60;
+    
+    $hours = floor($hours);
+    
+    return $hours;
+    
+}
 
 ?>
 <!DOCTYPE html>
@@ -38,6 +54,7 @@ $JLPQuery = $conn->query('SELECT * FROM jlptickets');
                         <td>Pool</td>
                         <td>Ticket ID</td>
                         <td>Last Touched</td>
+                        <td>Age (Hours)</td>
                     </tr>
                     <tbody>
                         <?php
@@ -47,6 +64,7 @@ $JLPQuery = $conn->query('SELECT * FROM jlptickets');
                             <td><?php echo $row['pool']?></td>
                             <td><?php echo $row['ticket_id']?></td>
                             <td><?php echo $row['last_touched']?></td>
+                            <td><?php echo hoursDiff($row['last_touched']) ?></td>
                         </tr>
         
                         <?php
@@ -64,6 +82,7 @@ $JLPQuery = $conn->query('SELECT * FROM jlptickets');
                         <td>Pool</td>
                         <td>Ticket ID</td>
                         <td>Last Touched</td>
+                        <td>Age (Hours)</td>
                     </tr>
                     <tbody>
                         <?php
@@ -73,6 +92,7 @@ $JLPQuery = $conn->query('SELECT * FROM jlptickets');
                             <td><?php echo $row['pool']?></td>
                             <td><?php echo $row['ticket_id']?></td>
                             <td><?php echo $row['last_touched']?></td>
+                            <td><?php echo hoursDiff($row['last_touched']) ?></td>
                         </tr>
         
                         <?php
