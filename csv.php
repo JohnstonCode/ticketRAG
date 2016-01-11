@@ -49,6 +49,8 @@ class CSV
             die('Connection failed: ' . $conn->connect_error);
         }
         
+        $conn->query('TRUNCATE TABLE ' . $table);
+        
         for($i = 0; $i < count($data); $i++)
         {
             $sql = "INSERT INTO ".$table." (pool, ticket_id, last_touched) 
