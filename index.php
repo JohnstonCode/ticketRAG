@@ -1,3 +1,17 @@
+<?php
+//Create connection
+$conn = new mysqli('localhost', 'root', '', 'rag');
+//Check connection
+if($conn->connect_error)
+{
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$PNQuery = $conn->query('SELECT * FROM pntickets');
+$JLPQuery = $conn->query('SELECT * FROM jlptickets');
+
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,8 +29,59 @@
                     <option value="all">All</option>
                 </select>
             </header>
-
-        </div>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <td>Oldest Ticket Report PN</td>
+                    </tr>
+                    <tr>
+                        <td>Pool</td>
+                        <td>Ticket ID</td>
+                        <td>Last Touched</td>
+                    </tr>
+                    <tbody>
+                        <?php
+                            while($row = mysqli_fetch_assoc($PNQuery)) {
+                        ?>
+                        <tr>
+                            <td><?php echo $row['pool']?></td>
+                            <td><?php echo $row['ticket_id']?></td>
+                            <td><?php echo $row['last_touched']?></td>
+                        </tr>
+        
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </thead>
+            </table>
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <td>Oldest Ticket Report JLB</td>
+                    </tr>
+                    <tr>
+                        <td>Pool</td>
+                        <td>Ticket ID</td>
+                        <td>Last Touched</td>
+                    </tr>
+                    <tbody>
+                        <?php
+                            while($row = mysqli_fetch_assoc($JLPQuery)) {
+                        ?>
+                        <tr>
+                            <td><?php echo $row['pool']?></td>
+                            <td><?php echo $row['ticket_id']?></td>
+                            <td><?php echo $row['last_touched']?></td>
+                        </tr>
+        
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </thead>
+            </table>
+        </div><!-- END of page wrapper -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
     </body>
