@@ -39,6 +39,33 @@
                 </select></br>
                 <input type="submit" value="Upload" name="submit">
             </form>
-        </section>   
+        </section>
+        <section>
+            <form action="createFilter.php" method="POST">
+                Filter Name: <input type="text" name="filter-name"/>
+                <input type="submit" value="Create Filter"/>
+            </form>
+        </section>
+        <table width="100%">
+                <thead>
+                    <tr>
+                        <td class="main-table-header">Filter Settings</td>
+                    </tr>
+                    <tr>
+                        <td>Pool</td>
+                        <td>Subscribe</td>
+                        <td>Amber KPI</td>
+                        <td>Red KPI</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Test</td>
+                        <td><input type="checkbox" name="test"/></td>
+                        <td><input type="value" name="test-amber-kpi"/></td>
+                        <td><input type="value" name="test-red-kpi"/></td>
+                    </tr>
+                </tbody>
+            </table>
     </body>
 </html>

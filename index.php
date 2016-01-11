@@ -48,7 +48,7 @@ function hoursDiff($ticketAge)
             <table width="100%">
                 <thead>
                     <tr>
-                        <td>Oldest Ticket Report PN</td>
+                        <td class="main-table-header">Oldest Ticket Report PN</td>
                     </tr>
                     <tr>
                         <td>Pool</td>
@@ -76,7 +76,7 @@ function hoursDiff($ticketAge)
             <table width="100%">
                 <thead>
                     <tr>
-                        <td>Oldest Ticket Report JLB</td>
+                        <td class="main-table-header">Oldest Ticket Report JLB</td>
                     </tr>
                     <tr>
                         <td>Pool</td>
