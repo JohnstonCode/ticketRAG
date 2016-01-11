@@ -1,4 +1,7 @@
 <?php
+
+   require_once('csv.php');
+
    if(isset($_FILES['report'])){
       $errors= array();
       $file_name = $_FILES['report']['name'];
@@ -14,7 +17,9 @@
       
       if(empty($errors)==true){
          move_uploaded_file($file_tmp,"uploads/".$file_name);
-         echo "Success";
+         $reports = CSV::convertCSV();
+         CSV::moveToDB($reports[0], 'pntickets');
+         csv::moveToDB($reports[1], 'jlptickets');
       }else{
          print_r($errors);
       }
