@@ -1,3 +1,29 @@
+<?php
+require_once('pools.php');
+
+//Create connection
+$conn = new mysqli('localhost', 'root', '', 'rag');
+//Check connection
+if($conn->connect_error)
+{
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+$faultsFilter = $conn->query('SELECT * FROM faultsFilter');
+
+$pools = [];
+$amberKpi = [];
+$redKpi = [];
+
+
+while($row = mysqli_fetch_array($faultsFilter))
+{
+    $pools[] = $row['pool'];
+    $amberKpi[] = $row['amber_kpi'];
+    $redKpi[] = $row['red_kpi'];
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,6 +79,7 @@
                         <td class="main-table-header">Filter Settings</td>
                     </tr>
                     <tr>
+                        <td>vISP</td>
                         <td>Pool</td>
                         <td>Subscribe</td>
                         <td>Amber KPI</td>
@@ -60,12 +87,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    for($i = 0; $i < count($allPNPools); $i++) {
+                    ?>
                     <tr>
-                        <td>Test</td>
-                        <td><input type="checkbox" name="test"/></td>
-                        <td><input type="value" name="test-amber-kpi"/></td>
-                        <td><input type="value" name="test-red-kpi"/></td>
+                        <td>PN</td>
+                        <td><?php echo $allPNPools[$i]?></td>
+                        <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked';}?>/></td>
+                        <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];  }?>"/></td>
+                        <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
                     </tr>
+                    <?php
+                    }
+                    ?>
                 </tbody>
             </table>
             <input type="submit" value="Update"/>
