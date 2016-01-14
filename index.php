@@ -20,11 +20,11 @@ function hoursDiff($ticketAge)
     
     $diff = $timeNow - $ticketAge;
     
-    $hours = $diff / 60 / 60;
+    $hours = floor($diff/3600);
     
-    $hours = floor($hours);
+    $minutes = floor(($diff%3600)/60);
     
-    return $hours;
+    return $hours . ':' . $minutes;
     
 }
 
@@ -37,6 +37,18 @@ while($row = mysqli_fetch_array($PNQuery))
     $PNpools[] = $row['pool'];
     $PNticketID[] = $row['ticket_id'];
     $PNlastTouched[] = $row['last_touched'];
+
+}
+
+$JLPpools = [];
+$JLPticketID = [];
+$JLPlastTouched = [];
+
+while($row = mysqli_fetch_array($JLPQuery))
+{
+    $JLPpools[] = $row['pool'];
+    $JLPticketID[] = $row['ticket_id'];
+    $JLPlastTouched[] = $row['last_touched'];
 
 }
 
@@ -100,15 +112,14 @@ while($row = mysqli_fetch_array($PNQuery))
                     </tr>
                     <tbody>
                         <?php
-                            while($row = mysqli_fetch_assoc($JLPQuery)) {
+                        for($i = 0; $i < count($allJLPPools); $i++) {
                         ?>
                         <tr>
-                            <td><?php echo $row['pool']?></td>
-                            <td><?php echo $row['ticket_id']?></td>
-                            <td><?php echo $row['last_touched']?></td>
-                            <td><?php echo hoursDiff($row['last_touched']) ?></td>
+                            <td><?php echo $allJLPPools[$i]?></td>
+                            <td><?php if(in_array($allJLPPools[$i], $JLPpools)){ $pos = array_search($allJLPPools[$i], $JLPpools); echo $JLPticketID[$pos]; }else { echo 'Clear!'; } ?></td>
+                            <td><?php if(in_array($allJLPPools[$i], $JLPpools)){ $pos = array_search($allJLPPools[$i], $JLPpools); echo $JLPlastTouched[$pos]; } ?></td>
+                            <td><?php if(in_array($allJLPPools[$i], $JLPpools)){ $pos = array_search($allJLPPools[$i], $JLPpools); echo hoursDiff($JLPlastTouched[$pos]); } ?></td>
                         </tr>
-        
                         <?php
                         }
                         ?>
