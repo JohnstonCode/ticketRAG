@@ -40,9 +40,11 @@ function hoursDiff($ticketAge)
     <body>
         <div id="page-wrapper">
             <header>
-                <a href="settings.php">Settings</a>
-                Filter: <select>
-                    <option value="all">All</option>
+                <a href="settings.php">Settings</a></br>
+                Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
+                    <option></option>
+                    <option value="faults">Faults</option>
+                    <option value="test">Test</option>
                 </select>
             </header>
             <table width="100%">
