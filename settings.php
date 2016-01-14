@@ -15,7 +15,6 @@ $pools = [];
 $amberKpi = [];
 $redKpi = [];
 
-
 while($row = mysqli_fetch_array($faultsFilter))
 {
     $pools[] = $row['pool'];
@@ -72,6 +71,11 @@ while($row = mysqli_fetch_array($faultsFilter))
                 <input type="submit" value="Create Filter"/>
             </form>
         </section>
+        Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
+            <option></option>
+            <option value="faults">Faults</option>
+            <option value="test">Test</option>
+        </select>
         <form>
             <table width="100%">
                 <thead>
@@ -93,7 +97,7 @@ while($row = mysqli_fetch_array($faultsFilter))
                     <tr>
                         <td>PN</td>
                         <td><?php echo $allPNPools[$i]?></td>
-                        <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked';}?>/></td>
+                        <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
                         <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];  }?>"/></td>
                         <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
                     </tr>
