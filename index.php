@@ -1,4 +1,5 @@
 <?php
+require_once('pools.php');
 //Create connection
 $conn = new mysqli('localhost', 'root', '', 'rag');
 //Check connection
@@ -25,6 +26,18 @@ function hoursDiff($ticketAge)
     
     return $hours;
     
+}
+
+$PNpools = [];
+$PNticketID = [];
+$PNlastTouched = [];
+
+while($row = mysqli_fetch_array($PNQuery))
+{
+    $PNpools[] = $row['pool'];
+    $PNticketID[] = $row['ticket_id'];
+    $PNlastTouched[] = $row['last_touched'];
+
 }
 
 ?>
@@ -60,15 +73,14 @@ function hoursDiff($ticketAge)
                     </tr>
                     <tbody>
                         <?php
-                            while($row = mysqli_fetch_assoc($PNQuery)) {
+                        for($i = 0; $i < count($allPNPools); $i++) {
                         ?>
                         <tr>
-                            <td><?php echo $row['pool']?></td>
-                            <td><?php echo $row['ticket_id']?></td>
-                            <td><?php echo $row['last_touched']?></td>
-                            <td><?php echo hoursDiff($row['last_touched']) ?></td>
+                            <td><?php echo $allPNPools[$i]?></td>
+                            <td><?php if(in_array($allPNPools[$i], $PNpools)){ $pos = array_search($allPNPools[$i], $PNpools); echo $PNticketID[$pos]; }else { echo 'Clear!'; } ?></td>
+                            <td><?php if(in_array($allPNPools[$i], $PNpools)){ $pos = array_search($allPNPools[$i], $PNpools); echo $PNlastTouched[$pos]; } ?></td>
+                            <td><?php if(in_array($allPNPools[$i], $PNpools)){ $pos = array_search($allPNPools[$i], $PNpools); echo hoursDiff($PNlastTouched[$pos]); } ?></td>
                         </tr>
-        
                         <?php
                         }
                         ?>
