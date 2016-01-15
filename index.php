@@ -52,6 +52,12 @@ while($row = mysqli_fetch_array($JLPQuery))
 
 }
 
+//SELECT faultsFilter.pool, faultsFilter.amber_kpi, faultsFilter.red_kpi, pntickets.ticket_id, pntickets.last_touched
+//FROM faultsFilter
+//LEFT JOIN pntickets ON faultsFilter.pool = pntickets.pool
+//ORDER BY faultsFilter.pool
+
+
 ?>
 <!DOCTYPE html>
 <html>
