@@ -62,36 +62,6 @@ function hoursDiff($ticketAge)
                     $PNfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, pntickets.ticket_id, pntickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN pntickets ON '. $_GET['filter'] .'Filter.pool = pntickets.pool ORDER BY '. $_GET['filter'] .'Filter.pool');
                     $JLPfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, jlptickets.ticket_id, jlptickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN jlptickets ON '. $_GET['filter'] .'Filter.pool = jlptickets.pool ORDER BY '. $_GET['filter'] .'Filter.pool');
                     
-                    $PNPools = [];
-                    $PNTicketID = [];
-                    $PNLastTouched = [];
-                    $PNAmberKpi = [];
-                    $PNRedKpi = [];
-                    
-                    while($row = mysqli_fetch_array($PNfilter))
-                    {
-                        $PNPools[] = $row['pool'];
-                        $PNTicketID[] = $row['ticket_id'];
-                        $PNLastTouched[] = $row['last_touched'];
-                        $PNAmberKpi[] = $row['amber_kpi'];
-                        $PNRedKpi[] = $row['red_kpi'];
-                    }
-                    
-                    $JLPPools = [];
-                    $JLPTicketID = [];
-                    $JLPLastTouched = [];
-                    $JLPAmberKpi = [];
-                    $JLPRedKpi = [];
-                    
-                    while($row = mysqli_fetch_array($JLPfilter))
-                    {
-                        $JLPPools[] = $row['pool'];
-                        $JLPTicketID[] = $row['ticket_id'];
-                        $JLPLastTouched[] = $row['last_touched'];
-                        $JLPAmberKpi[] = $row['amber_kpi'];
-                        $JLPRedKpi[] = $row['red_kpi'];
-                    }
-                    
                     ?>        
                     <table width="100%">
                         <thead>
@@ -107,14 +77,14 @@ function hoursDiff($ticketAge)
                             </tr>
                             <tbody>
                                 <?php
-                                for($i = 0; $i < count($PNPools); $i++) {
+                                while($row = mysqli_fetch_array($PNfilter)){
                                 ?>
                                 <tr>
-                                    <td><?php echo $PNPools[$i]?></td>
-                                    <td><?php if($PNTicketID[$i] == ''){ echo 'Clear!'; }else { echo $PNTicketID[$i]; } ?></td>
-                                    <td><?php if($PNLastTouched[$i] != ''){ echo $PNTicketID[$i]; } ?></td>
-                                    <td><?php if($PNLastTouched[$i] != ''){ echo hoursDiff($PNLastTouched[$i]); } ?></td>
-                                    <td><?php if(hoursDiff($PNLastTouched[$i]) < intval($PNAmberKpi[$i])){ echo 'Green'; }elseif(hoursDiff($PNLastTouched[$i]) < intval($PNRedKpi[$i])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
+                                    <td><?php echo $row['pool']?></td>
+                                    <td><?php if($row['ticket_id'] == ''){ echo 'Clear!'; }else { echo $row['ticket_id']; } ?></td>
+                                    <td><?php if($row['last_touched'] != ''){ echo $row['last_touched']; } ?></td>
+                                    <td><?php if($row['last_touched'] != ''){ echo hoursDiff($row['last_touched']); } ?></td>
+                                    <td><?php if(hoursDiff($row['last_touched']) < intval($row['amber_kpi'])){ echo 'Green'; }elseif(hoursDiff($row['last_touched']) < intval($row['red_kpi'])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
                                 </tr>
                                 <?php
                                 }
@@ -136,13 +106,14 @@ function hoursDiff($ticketAge)
                             </tr>
                             <tbody>
                                 <?php
-                                for($i = 0; $i < count($JLPPools); $i++) {
+                                while($row = mysqli_fetch_array($JLPfilter)){
                                 ?>
                                 <tr>
-                                    <td><?php echo $JLPPools[$i]?></td>
-                                    <td><?php if($JLPTicketID[$i] == ''){ echo 'Clear!'; }else { echo $JLPTicketID[$i]; } ?></td>
-                                    <td><?php if($JLPLastTouched[$i] != ''){ echo $JLPTicketID[$i]; } ?></td>
-                                    <td><?php if($JLPLastTouched[$i] != ''){ echo hoursDiff($JLPLastTouched[$i]); } ?></td>
+                                    <td><?php echo $row['pool']?></td>
+                                    <td><?php if($row['ticket_id'] == ''){ echo 'Clear!'; }else { echo $row['ticket_id']; } ?></td>
+                                    <td><?php if($row['last_touched'] != ''){ echo $row['last_touched']; } ?></td>
+                                    <td><?php if($row['last_touched'] != ''){ echo hoursDiff($row['last_touched']); } ?></td>
+                                    <td><?php if(hoursDiff($row['last_touched']) < intval($row['amber_kpi'])){ echo 'Green'; }elseif(hoursDiff($row['last_touched']) < intval($row['red_kpi'])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
                                 </tr>
                                 <?php
                                 }
