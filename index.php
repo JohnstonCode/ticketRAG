@@ -2,6 +2,8 @@
 require_once('connect.php');
 function hoursDiff($ticketAge)
 {
+    if($ticketAge != '')
+    {
     $timeNow = date('Y-m-d h:m:s');
     
     $ticketAge = strtotime($ticketAge);
@@ -11,9 +13,26 @@ function hoursDiff($ticketAge)
     
     $hours = floor($diff/3600);
     
+    return $hours;
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+function minsDiff($ticketAge)
+{
+    $timeNow = date('Y-m-d h:m:s');
+    
+    $ticketAge = strtotime($ticketAge);
+    $timeNow = strtotime($timeNow);
+    
+    $diff = $timeNow - $ticketAge;
+    
     $minutes = floor(($diff%3600)/60);
     
-    return $hours . ':' . $minutes;
+    return $minutes;
     
 }
 ?>
@@ -96,6 +115,7 @@ function hoursDiff($ticketAge)
                                 <td>Ticket ID</td>
                                 <td>Last Touched</td>
                                 <td>Age (Hours)</td>
+                                <td>Color</td>
                             </tr>
                             <tbody>
                                 <?php
@@ -105,7 +125,8 @@ function hoursDiff($ticketAge)
                                     <td><?php echo $PNPools[$i]?></td>
                                     <td><?php if($PNTicketID[$i] == ''){ echo 'Clear!'; }else { echo $PNTicketID[$i]; } ?></td>
                                     <td><?php if($PNLastTouched[$i] != ''){ echo $PNTicketID[$i]; } ?></td>
-                                    <td><?php if($PNLastTouched[$i] != ''){ echo hoursDiff($PNLastTouched[$i]); } ?></td>
+                                    <td><?php if($PNLastTouched[$i] != ''){ echo hoursDiff($PNLastTouched[$i]) . ':' . minsDiff($PNLastTouched[$i]); } ?></td>
+                                    <td><?php if(hoursDiff($PNLastTouched[$i]) < intval($PNAmberKpi[$i])){ echo 'Green'; }elseif(hoursDiff($PNLastTouched[$i]) < intval($PNRedKpi[$i])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
                                 </tr>
                                 <?php
                                 }
@@ -123,6 +144,7 @@ function hoursDiff($ticketAge)
                                 <td>Ticket ID</td>
                                 <td>Last Touched</td>
                                 <td>Age (Hours)</td>
+                                <td>Color</td>
                             </tr>
                             <tbody>
                                 <?php
