@@ -1,4 +1,5 @@
 <?php
+require_once('connect.php');
 
 class CSV
 {
@@ -40,14 +41,6 @@ class CSV
     
     public function moveToDB($data, $table)
     {
-        
-        //Create connection
-        $conn = new mysqli('localhost', 'root', '', 'rag');
-        //Check connection
-        if($conn->connect_error)
-        {
-            die('Connection failed: ' . $conn->connect_error);
-        }
         
         $conn->query('TRUNCATE TABLE ' . $table);
         

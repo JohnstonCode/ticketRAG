@@ -1,12 +1,6 @@
 <?php
 require_once('pools.php');
-//Create connection
-$conn = new mysqli('localhost', 'root', '', 'rag');
-//Check connection
-if($conn->connect_error)
-{
-    die('Connection failed: ' . $conn->connect_error);
-}
+require_once('connect.php');
 
 $PNQuery = $conn->query('SELECT * FROM pntickets');
 $JLPQuery = $conn->query('SELECT * FROM jlptickets');
@@ -57,7 +51,7 @@ while($row = mysqli_fetch_array($JLPQuery))
 //LEFT JOIN pntickets ON faultsFilter.pool = pntickets.pool
 //ORDER BY faultsFilter.pool
 
-
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>

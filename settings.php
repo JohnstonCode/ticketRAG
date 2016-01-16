@@ -1,27 +1,6 @@
 <?php
 require_once('pools.php');
-
-//Create connection
-$conn = new mysqli('localhost', 'root', '', 'rag');
-//Check connection
-if($conn->connect_error)
-{
-    die('Connection failed: ' . $conn->connect_error);
-}
-
-$faultsFilter = $conn->query('SELECT * FROM faultsFilter');
-
-$pools = [];
-$amberKpi = [];
-$redKpi = [];
-
-while($row = mysqli_fetch_array($faultsFilter))
-{
-    $pools[] = $row['pool'];
-    $amberKpi[] = $row['amber_kpi'];
-    $redKpi[] = $row['red_kpi'];
-}
-
+require_once('connect.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,32 +15,6 @@ while($row = mysqli_fetch_array($faultsFilter))
         <section>
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 Select NOC report: <input type="file" name="report">
-                Time: <select name="time">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                </select>
                 <input type="submit" value="Upload" name="submit">
             </form>
         </section>
@@ -92,16 +45,50 @@ while($row = mysqli_fetch_array($faultsFilter))
                 </thead>
                 <tbody>
                     <?php
-                    for($i = 0; $i < count($allPNPools); $i++) {
-                    ?>
-                    <tr>
-                        <td>PN</td>
-                        <td><?php echo $allPNPools[$i]?></td>
-                        <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
-                        <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];  }?>"/></td>
-                        <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
-                    </tr>
-                    <?php
+                    
+                    if(isset($_GET['filter']))
+                    {
+                        $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
+                        
+                        $filters = [];
+
+                        while($row = mysqli_fetch_array($allTables))
+                        {
+                            $filters[] = $row['Tables_in_rag (%Filter)'];
+                        }
+                        
+                        if (in_array($_GET['filter'] . 'Filter', $filters))
+                        {
+                            
+                            $faultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter');
+
+                            $pools = [];
+                            $amberKpi = [];
+                            $redKpi = [];
+                            
+                            while($row = mysqli_fetch_array($faultsFilter))
+                            {
+                                $pools[] = $row['pool'];
+                                $amberKpi[] = $row['amber_kpi'];
+                                $redKpi[] = $row['red_kpi'];
+                            }
+                            
+                            for($i = 0; $i < count($allPNPools); $i++) {
+                            ?>
+                            <tr>
+                                <td>PN</td>
+                                <td><?php echo $allPNPools[$i]?></td>
+                                <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
+                                <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}else { echo '0';}?>"/></td>
+                                <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }else { echo '0'; }?>"/></td>
+                            </tr>
+                            <?php
+                            }
+                        }
+                        else
+                        {
+                            echo 'Filter does not exsist';
+                        }
                     }
                     ?>
                 </tbody>
