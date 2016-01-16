@@ -13,26 +13,14 @@ function hoursDiff($ticketAge)
     
     $hours = floor($diff/3600);
     
-    return $hours;
+    $minutes = floor(($diff%3600)/60);
+    
+    return $hours . ':' . $minutes;
     }
     else
     {
         return 0;
     }
-    
-}
-function minsDiff($ticketAge)
-{
-    $timeNow = date('Y-m-d h:m:s');
-    
-    $ticketAge = strtotime($ticketAge);
-    $timeNow = strtotime($timeNow);
-    
-    $diff = $timeNow - $ticketAge;
-    
-    $minutes = floor(($diff%3600)/60);
-    
-    return $minutes;
     
 }
 ?>
@@ -125,7 +113,7 @@ function minsDiff($ticketAge)
                                     <td><?php echo $PNPools[$i]?></td>
                                     <td><?php if($PNTicketID[$i] == ''){ echo 'Clear!'; }else { echo $PNTicketID[$i]; } ?></td>
                                     <td><?php if($PNLastTouched[$i] != ''){ echo $PNTicketID[$i]; } ?></td>
-                                    <td><?php if($PNLastTouched[$i] != ''){ echo hoursDiff($PNLastTouched[$i]) . ':' . minsDiff($PNLastTouched[$i]); } ?></td>
+                                    <td><?php if($PNLastTouched[$i] != ''){ echo hoursDiff($PNLastTouched[$i]); } ?></td>
                                     <td><?php if(hoursDiff($PNLastTouched[$i]) < intval($PNAmberKpi[$i])){ echo 'Green'; }elseif(hoursDiff($PNLastTouched[$i]) < intval($PNRedKpi[$i])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
                                 </tr>
                                 <?php
