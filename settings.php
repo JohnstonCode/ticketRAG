@@ -29,71 +29,75 @@ require_once('connect.php');
             <option value="faults">Faults</option>
             <option value="test">Test</option>
         </select>
-        <form>
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <td class="main-table-header">Filter Settings</td>
-                    </tr>
-                    <tr>
-                        <td>vISP</td>
-                        <td>Pool</td>
-                        <td>Subscribe</td>
-                        <td>Amber KPI</td>
-                        <td>Red KPI</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <?php
                     
-                    if(isset($_GET['filter']))
-                    {
-                        $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
-                        
-                        $filters = [];
+        if(isset($_GET['filter']))
+        {
+            $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
+            
+            $filters = [];
 
-                        while($row = mysqli_fetch_array($allTables))
-                        {
-                            $filters[] = $row['Tables_in_rag (%Filter)'];
-                        }
-                        
-                        if (in_array($_GET['filter'] . 'Filter', $filters))
-                        {
-                            
-                            $faultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter');
+            while($row = mysqli_fetch_array($allTables))
+            {
+                $filters[] = $row['Tables_in_rag (%Filter)'];
+            }
+            
+            if (in_array($_GET['filter'] . 'Filter', $filters))
+            {
+                
+                $faultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter');
 
-                            $pools = [];
-                            $amberKpi = [];
-                            $redKpi = [];
-                            
-                            while($row = mysqli_fetch_array($faultsFilter))
-                            {
-                                $pools[] = $row['pool'];
-                                $amberKpi[] = $row['amber_kpi'];
-                                $redKpi[] = $row['red_kpi'];
-                            }
-                            
-                            for($i = 0; $i < count($allPNPools); $i++) {
-                            ?>
-                            <tr>
-                                <td>PN</td>
-                                <td><?php echo $allPNPools[$i]?></td>
-                                <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
-                                <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}else { echo '0';}?>"/></td>
-                                <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }else { echo '0'; }?>"/></td>
-                            </tr>
-                            <?php
-                            }
-                        }
-                        else
-                        {
-                            echo 'Filter does not exsist';
-                        }
-                    }
-                    ?>
-                </tbody>
-            </table>
-            <input type="submit" value="Update"/>
-        </form>
+                $pools = [];
+                $amberKpi = [];
+                $redKpi = [];
+                
+                while($row = mysqli_fetch_array($faultsFilter))
+                {
+                    $pools[] = $row['pool'];
+                    $amberKpi[] = $row['amber_kpi'];
+                    $redKpi[] = $row['red_kpi'];
+                }
+                ?>
+                <form>
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <td class="main-table-header">Filter Settings</td>
+                        </tr>
+                        <tr>
+                            <td>vISP</td>
+                            <td>Pool</td>
+                            <td>Subscribe</td>
+                            <td>Amber KPI</td>
+                            <td>Red KPI</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                <?php
+                for($i = 0; $i < count($allPNPools); $i++) {
+                ?>
+                    <tr>
+                        <td>PN</td>
+                        <td><?php echo $allPNPools[$i]?></td>
+                        <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
+                        <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}else { echo '0';}?>"/></td>
+                        <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }else { echo '0'; }?>"/></td>
+                    </tr>
+                    </tbody>
+
+                <?php
+                }
+                ?>
+                </table>
+                    <input type="submit" value="Update"/>
+                </form>
+            <?php    
+            }
+            else
+            {
+                echo '</br>Filter does not exsist';
+            }
+        }
+        ?>
     </body>
 </html>
