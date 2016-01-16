@@ -46,6 +46,7 @@ require_once('connect.php');
             {
                 
                 $faultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter');
+                $conn->close();
 
                 $pools = [];
                 $amberKpi = [];
@@ -58,7 +59,8 @@ require_once('connect.php');
                     $redKpi[] = $row['red_kpi'];
                 }
                 ?>
-                <form>
+                <form action="editFilter.php" method="POST">
+                <input type="hidden" name="<?php echo $_GET['filter']; ?>"/>
                 <table width="100%">
                     <thead>
                         <tr>
@@ -79,9 +81,9 @@ require_once('connect.php');
                     <tr>
                         <td>PN</td>
                         <td><?php echo $allPNPools[$i]?></td>
-                        <td><input type="checkbox" name="test"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
-                        <td><input type="input" name="test-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}else { echo '0';}?>"/></td>
-                        <td><input type="input" name="test-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }else { echo '0'; }?>"/></td>
+                        <td><input type="checkbox" name="<?php echo $allPNPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
+                        <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}?>"/></td>
+                        <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
                     </tr>
                     </tbody>
 
