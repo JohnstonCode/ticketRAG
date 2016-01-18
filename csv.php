@@ -1,8 +1,7 @@
 <?php
-require_once('connect.php');
-
 class CSV
 {
+
     
     public function convertCSV()
     {
@@ -41,6 +40,7 @@ class CSV
     
     public function moveToDB($data, $table)
     {
+        $conn = new mysqli('localhost', 'root', '', 'rag');
         
         $conn->query('TRUNCATE TABLE ' . $table);
         
