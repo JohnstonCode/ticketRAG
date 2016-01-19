@@ -75,9 +75,9 @@ require_once('connect.php');
                         </tr>
                     </thead>
                     <tbody>
-                <?php
-                for($i = 0; $i < count($allPNPools); $i++) {
-                ?>
+                    <?php
+                    for($i = 0; $i < count($allPNPools); $i++) {
+                    ?>
                     <tr>
                         <td>PN</td>
                         <td><?php echo $allPNPools[$i]?></td>
@@ -86,10 +86,24 @@ require_once('connect.php');
                         <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
                     </tr>
                     </tbody>
-
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                    <tbody>
+                    <?php
+                    for($i = 0; $i < count($allJLPPools); $i++) {
+                    ?>
+                    <tr>
+                        <td>JLP</td>
+                        <td><?php echo $allPNPools[$i]?></td>
+                        <td><input type="checkbox" name="<?php echo $allJLPPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
+                        <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}?>"/></td>
+                        <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
+                    </tr>
+                    </tbody>
+                    <?php
+                    }
+                    ?>
                 </table>
                     <input type="submit" value="Update"/>
                 </form>
