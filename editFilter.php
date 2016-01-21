@@ -38,9 +38,9 @@ for($i = 0; $i < count($pools); $i++)
     VALUES('".$pools[$i]."', '".$amberKpi[$i]."', '".$redKpi[$i]."')";
     
     if (!$conn->query($sql))
-      {
+    {
       echo("Error description: " . mysqli_error($con));
-      }
+    }
     
 }
 
