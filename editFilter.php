@@ -1,15 +1,26 @@
 <?php
 require_once('connect.php');
+require_once('pools.php');
 
-$pools = [];
-$amberKpi = [];
-$redKpi = [];
+$PNpools = [];
+$PNamberKpi = [];
+$PNredKpi = [];
+$JLPpools = [];
+$JLPamberKpi = [];
+$JLPredKpi = [];
 $filter = '';
 
 foreach($_POST as $key => $value){
     if($value == 'on')
-    {
-        $pools[] = str_replace("_", " ", $key);
+    {   
+        if(strpos($key, 'PN') == true)
+        {
+            $PNpools[] = str_replace("_", " ", $key);
+        }
+        else
+        {
+            $JLPpools[] = str_replace("_", " ", $key);
+        }
     }
     
     if($value != 'on' and $value != '')
@@ -30,18 +41,20 @@ foreach($_POST as $key => $value){
     }
 }
 
-$conn->query('TRUNCATE TABLE ' . $filter . 'Filter');
+var_dump($PNpools);
 
-for($i = 0; $i < count($pools); $i++)
-{
-    $sql = "INSERT INTO ".$filter."Filter (pool, amber_kpi, red_kpi) 
-    VALUES('".$pools[$i]."', '".$amberKpi[$i]."', '".$redKpi[$i]."')";
-    
-    if (!$conn->query($sql))
-    {
-      echo("Error description: " . mysqli_error($con));
-    }
-    
-}
+//$conn->query('TRUNCATE TABLE ' . $filter . 'Filter');
 
-$conn->close();
+//for($i = 0; $i < count($pools); $i++)
+//{
+    //$sql = "INSERT INTO ".$filter."Filter (pool, amber_kpi, red_kpi) 
+    //VALUES('".$pools[$i]."', '".$amberKpi[$i]."', '".$redKpi[$i]."')";
+    
+    //if (!$conn->query($sql))
+    //{
+      //echo("Error description: " . mysqli_error($con));
+    //}
+    
+//}
+
+//$conn->close();

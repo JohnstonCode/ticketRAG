@@ -60,7 +60,7 @@ require_once('connect.php');
                 }
                 ?>
                 <form action="editFilter.php" method="POST">
-                <input type="hidden" name="<?php echo $_GET['filter']; ?>"/>
+
                 <table width="100%">
                     <thead>
                         <tr>
@@ -81,9 +81,9 @@ require_once('connect.php');
                     <tr>
                         <td>PN</td>
                         <td><?php echo $allPNPools[$i]?></td>
-                        <td><input type="checkbox" name="PN-<?php echo $allPNPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
-                        <td><input type="input" name="PN-<?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}?>"/></td>
-                        <td><input type="input" name="PN-<?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
+                        <td><input type="checkbox" name="PN - <?php echo $allPNPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
+                        <td><input type="input" name="PN - <?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}?>"/></td>
+                        <td><input type="input" name="PN - <?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
                     </tr>
                     </tbody>
                     <?php
