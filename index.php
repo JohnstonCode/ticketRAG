@@ -59,9 +59,9 @@ function hoursDiff($ticketAge)
                 if (in_array($_GET['filter'] . 'Filter', $allfilters))
                 {
                     
-                    $PNfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, pntickets.ticket_id, pntickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN pntickets ON '. $_GET['filter'] .'Filter.pool = pntickets.pool ORDER BY '. $_GET['filter'] .'Filter.pool');
-                    $JLPfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, jlptickets.ticket_id, jlptickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN jlptickets ON '. $_GET['filter'] .'Filter.pool = jlptickets.pool ORDER BY '. $_GET['filter'] .'Filter.pool');
-                    
+                    $PNfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, pntickets.ticket_id, pntickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN pntickets ON '. $_GET['filter'] .'Filter.pool = pntickets.pool WHERE '. $_GET['filter'] .'Filter.visp = "PN"');
+                    $JLPfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, jlptickets.ticket_id, jlptickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN jlptickets ON '. $_GET['filter'] .'Filter.pool = jlptickets.pool WHERE '. $_GET['filter'] .'Filter.visp = "JLP"');
+            
                     ?>        
                     <table width="100%">
                         <thead>
