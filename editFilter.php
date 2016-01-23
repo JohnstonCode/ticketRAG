@@ -2,59 +2,62 @@
 require_once('connect.php');
 require_once('pools.php');
 
+ini_set('memory_limit', '1024M');
+
 $PNpools = [];
 $PNamberKpi = [];
 $PNredKpi = [];
+
 $JLPpools = [];
 $JLPamberKpi = [];
 $JLPredKpi = [];
+
 $filter = '';
 
 foreach($_POST as $key => $value){
-    if($value == 'on')
-    {   
-        if(strpos($key, 'PN') == true)
-        {
-            $PNpools[] = str_replace("_", " ", $key);
-        }
-        else
-        {
-            $JLPpools[] = str_replace("_", " ", $key);
-        }
-    }
     
-    if($value != 'on' and $value != '')
+    if(strstr($key, 'visp-pn') == 0)
     {
-        if(strpos($key,'amber-kpi') != false)
-        {
-            $amberKpi[] = $value;
-        }
-        else
-        {
-            $redKpi[] = $value;
-        }
+        $PNpools[] = $key;
     }
-    
-    if(strpos($key,'amber-kpi') == false and strpos($key,'red-kpi') == false and $value != 'on')
+    else
     {
-        $filter = $key;
+        $JLPpools[] = $key;
     }
 }
 
-var_dump($PNpools);
+print_r(array_slice($_POST, 900));
 
 //$conn->query('TRUNCATE TABLE ' . $filter . 'Filter');
 
-//for($i = 0; $i < count($pools); $i++)
+//for($i = 0; $i < count($PNpools); $i++)
 //{
-    //$sql = "INSERT INTO ".$filter."Filter (pool, amber_kpi, red_kpi) 
-    //VALUES('".$pools[$i]."', '".$amberKpi[$i]."', '".$redKpi[$i]."')";
+    //$sql = "INSERT INTO ".$filter."Filter (visp, pool, amber_kpi, red_kpi) 
+    //VALUES('PN', '".$PNpools[$i]."', '".$PNamberKpi[$i]."', '".$PNredKpi[$i]."')";
     
-    //if (!$conn->query($sql))
+    //if ($conn->query($sql) === TRUE) 
     //{
-      //echo("Error description: " . mysqli_error($con));
+        //echo "New record created successfully";
+    //} else 
+    //{
+        //echo "Error: " . $sql . "<br>" . $conn->error;
     //}
+
+//}
+
+//for($i = 0; $i < count($JLPpools); $i++)
+//{
+    //$sql = "INSERT INTO ".$filter."Filter (visp, pool, amber_kpi, red_kpi) 
+    //VALUES('JLP', '".$JLPpools[$i]."', '".$JLPamberKpi[$i]."', '".$JLPredKpi[$i]."')";
     
+    //if ($conn->query($sql) === TRUE) 
+    //{
+        //echo "New record created successfully";
+    //} else 
+    //{
+        //echo "Error: " . $sql . "<br>" . $conn->error;
+    //}
+
 //}
 
 //$conn->close();

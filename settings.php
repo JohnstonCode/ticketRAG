@@ -45,22 +45,34 @@ require_once('connect.php');
             if (in_array($_GET['filter'] . 'Filter', $filters))
             {
                 
-                $faultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter');
+                $PNfaultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter WHERE visp = "PN"');
+                $JLPfaultsFilter = $conn->query('SELECT * FROM '. $_GET['filter'] .'Filter WHERE visp = "JLP"');
                 $conn->close();
 
-                $pools = [];
-                $amberKpi = [];
-                $redKpi = [];
+                $PNpools = [];
+                $PNamberKpi = [];
+                $PNredKpi = [];
                 
-                while($row = mysqli_fetch_array($faultsFilter))
+                $JLPpools = [];
+                $JLPamberKpi = [];
+                $JLPredKpi = [];
+                
+                while($row = mysqli_fetch_array($PNfaultsFilter))
                 {
-                    $pools[] = $row['pool'];
-                    $amberKpi[] = $row['amber_kpi'];
-                    $redKpi[] = $row['red_kpi'];
+                    $PNpools[] = $row['pool'];
+                    $PNamberKpi[] = $row['amber_kpi'];
+                    $PNredKpi[] = $row['red_kpi'];
+                }
+                
+                while($row = mysqli_fetch_array($JLPfaultsFilter))
+                {
+                    $JLPpools[] = $row['pool'];
+                    $JLPamberKpi[] = $row['amber_kpi'];
+                    $JLPredKpi[] = $row['red_kpi'];
                 }
                 ?>
-                <form action="editFilter.php" method="POST">
-
+                <form action="editFilter.php" method="POST" name="filter">
+                <input type="hidden" name="<?php echo $_GET['filter']; ?>"/>
                 <table width="100%">
                     <thead>
                         <tr>
@@ -81,9 +93,9 @@ require_once('connect.php');
                     <tr>
                         <td>PN</td>
                         <td><?php echo $allPNPools[$i]?></td>
-                        <td><input type="checkbox" name="PN - <?php echo $allPNPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
-                        <td><input type="input" name="PN - <?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}?>"/></td>
-                        <td><input type="input" name="PN - <?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
+                        <td><input type="checkbox" name="visp-pn-<?php echo $allPNPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $PNpools)){ echo 'checked'; } ?>/></td>
+                        <td><input type="input" name="visp-pn-<?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $PNpools)){ $pos = array_search($allPNPools[$i], $PNpools); echo $PNamberKpi[$pos];}?>"/></td>
+                        <td><input type="input" name="visp-pn-<?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $PNpools)){ $pos = array_search($allPNPools[$i], $PNpools); echo $PNredKpi[$pos]; }?>"/></td>
                     </tr>
                     </tbody>
                     <?php
@@ -95,10 +107,10 @@ require_once('connect.php');
                     ?>
                     <tr>
                         <td>JLP</td>
-                        <td><?php echo $allPNPools[$i]?></td>
-                        <td><input type="checkbox" name="<?php echo $allJLPPools[$i]; ?>"<?php if(in_array($allPNPools[$i], $pools)){ echo 'checked'; } ?>/></td>
-                        <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $amberKpi[$pos];}?>"/></td>
-                        <td><input type="input" name="<?php echo $allPNPools[$i]; ?>-red-kpi" value="<?php if(in_array($allPNPools[$i], $pools)){ $pos = array_search($allPNPools[$i], $pools); echo $redKpi[$pos]; }?>"/></td>
+                        <td><?php echo $allJLPPools[$i]?></td>
+                        <td><input type="checkbox" name="visp-jlp-<?php echo $allJLPPools[$i]; ?>"<?php if(in_array($allJLPPools[$i], $JLPpools)){ echo 'checked'; } ?>/></td>
+                        <td><input type="input" name="visp-jlp-<?php echo $allJLPPools[$i]; ?>-amber-kpi" value="<?php if(in_array($allJLPPools[$i], $JLPpools)){ $pos = array_search($allJLPPools[$i], $JLPpools); echo $JLPamberKpi[$pos];}?>"/></td>
+                        <td><input type="input" name="visp-jlp-<?php echo $allJLPPools[$i]; ?>-red-kpi" value="<?php if(in_array($allJLPPools[$i], $JLPpools)){ $pos = array_search($allJLPPools[$i], $JLPpools); echo $JLPredKpi[$pos]; }?>"/></td>
                     </tr>
                     </tbody>
                     <?php
@@ -115,5 +127,7 @@ require_once('connect.php');
             }
         }
         ?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="scripts/main.js"></script>
     </body>
 </html>
