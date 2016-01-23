@@ -71,8 +71,6 @@ require_once('connect.php');
                     $JLPredKpi[] = $row['red_kpi'];
                 }
                 ?>
-                <form action="editFilter.php" method="POST" name="filter">
-                <input type="hidden" name="<?php echo $_GET['filter']; ?>"/>
                 <table width="100%">
                     <thead>
                         <tr>
@@ -117,7 +115,10 @@ require_once('connect.php');
                     }
                     ?>
                 </table>
-                    <input type="submit" value="Update"/>
+                <form action="editFilter.php" method="POST" name="filter">
+                    <input type="hidden" name="<?php echo $_GET['filter']; ?>"/>
+                    <input type="hidden" name="filters" id="test" value=""/>
+                    <input type="button" value="Update" id="settings-button"/>
                 </form>
             <?php    
             }

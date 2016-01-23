@@ -26,7 +26,39 @@ foreach($_POST as $key => $value){
     }
 }
 
-print_r(array_slice($_POST, 900));
+print_r($_POST);
+
+for($i = 0; $i < count($_POST); $i++)
+{
+    if($i % 3 == 0)
+    {
+        $PNpools[] = $_POST['filters'][0];
+    }
+}
+
+$array = json_decode($_POST['filters']);
+
+$filters = array(
+    'pool' => array(),
+    'amber-kpi' => array(),
+    'red-kpi' => array(),
+    );
+    
+$counter = 0;
+
+for($i = 0; $i < count($array); $i++)
+{
+    if($counter % 3 == 0)
+    {
+    array_push($filters['pool'], $array[$i]);
+    array_push($filters['amber-kpi'], $array[($counter + 1)]);
+    array_push($filters['red-kpi'], $array[($counter + 2)]);
+    }
+    
+    $counter++;
+}
+
+var_dump($filters);
 
 //$conn->query('TRUNCATE TABLE ' . $filter . 'Filter');
 
