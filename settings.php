@@ -24,10 +24,18 @@ require_once('connect.php');
                 <input type="submit" value="Create Filter"/>
             </form>
         </section>
+        <section>
+            <form action="removeFilter.php" method="POST">
+                Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
+                    <option></option>
+                    <option value="faults">Faults</option>
+                </select>
+                <input type="submit" value="Remove Filter"/>
+            </form>
+        </section>
         Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
             <option></option>
             <option value="faults">Faults</option>
-            <option value="test">Test</option>
         </select>
         <?php
                     
