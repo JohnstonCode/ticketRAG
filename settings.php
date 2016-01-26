@@ -26,7 +26,7 @@ require_once('connect.php');
         </section>
         <section>
             <form action="removeFilter.php" method="POST">
-                Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
+                Select filter to delete: <select onChange="window.location='settings.php?filter='+this.value">
                     <option></option>
                     <option value="faults">Faults</option>
                 </select>
