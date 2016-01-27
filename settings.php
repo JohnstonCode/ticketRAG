@@ -27,7 +27,6 @@ require_once('connect.php');
         <section>
             <form action="removeFilter.php" method="POST">
                 Select filter to delete: <select onChange="window.location='settings.php?filter='+this.value">
-                    <option></option>
                     <option value="faults">Faults</option>
                 </select>
                 <input type="submit" value="Remove Filter"/>
