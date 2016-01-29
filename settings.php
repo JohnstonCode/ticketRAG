@@ -1,6 +1,16 @@
 <?php
 require_once('pools.php');
 require_once('connect.php');
+
+$allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
+
+$tableNames = [];
+
+
+
+
+var_dump(mysqli_fetch_array($allTables));
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +50,6 @@ require_once('connect.php');
                     
         if(isset($_GET['filter']))
         {
-            $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
             
             $filters = [];
 
