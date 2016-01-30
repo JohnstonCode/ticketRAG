@@ -23,6 +23,11 @@ function hoursDiff($ticketAge)
     }
     
 }
+
+$allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
+
+$allTables = mysqli_fetch_array($allTables);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,21 +44,24 @@ function hoursDiff($ticketAge)
                 <a href="settings.php">Settings</a></br>
                 Select filter to edit: <select onChange="window.location='?filter='+this.value">
                     <option></option>
-                    <option value="faults">Faults</option>
-                    <option value="test">Test</option>
+                    <?php
+                    for($i = 0; $i < count($allTables) - 1; $i++)
+                    {
+                        echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+                    }
+                    ?>
                 </select>
             </header>
             <?php
             
             if(isset($_GET['filter']))
             {
-                $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
                 
                 $allfilters = [];
     
-                while($row = mysqli_fetch_array($allTables))
+                foreach($allTables as $value)
                 {
-                    $allfilters[] = $row['Tables_in_rag (%Filter)'];
+                    $allfilters[] = $value;
                 }
                 
                 if (in_array($_GET['filter'] . 'Filter', $allfilters))

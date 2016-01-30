@@ -4,12 +4,7 @@ require_once('connect.php');
 
 $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
 
-$tableNames = [];
-
-
-
-
-var_dump(mysqli_fetch_array($allTables));
+$allTables = mysqli_fetch_array($allTables);
 
 ?>
 <!DOCTYPE html>
@@ -37,14 +32,25 @@ var_dump(mysqli_fetch_array($allTables));
         <section>
             <form action="removeFilter.php" method="POST">
                 Select filter to delete: <select onChange="window.location='settings.php?filter='+this.value">
-                    <option value="faults">Faults</option>
+                    <option></option>
+                    <?php
+                    for($i = 0; $i < count($allTables) - 1; $i++)
+                    {
+                        echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+                    }
+                    ?>
                 </select>
                 <input type="submit" value="Remove Filter"/>
             </form>
         </section>
         Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
             <option></option>
-            <option value="faults">Faults</option>
+            <?php
+            for($i = 0; $i < count($allTables) - 1; $i++)
+            {
+                echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+            }
+            ?>
         </select>
         <?php
                     
@@ -53,9 +59,9 @@ var_dump(mysqli_fetch_array($allTables));
             
             $filters = [];
 
-            while($row = mysqli_fetch_array($allTables))
+            foreach($allTables as $value)
             {
-                $filters[] = $row['Tables_in_rag (%Filter)'];
+                $filters[] = $value;
             }
             
             if (in_array($_GET['filter'] . 'Filter', $filters))
