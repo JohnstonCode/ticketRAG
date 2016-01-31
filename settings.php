@@ -17,6 +17,7 @@ $allTables = mysqli_fetch_array($allTables);
         <title>Ticket RAG | Settings</title>
     </head>
     <body>
+        <a href="/">Home</a>
         <section>
             <form action="upload.php" method="post" enctype="multipart/form-data">
                 Select NOC report: <input type="file" name="report">

@@ -69,9 +69,11 @@ $allTables = mysqli_fetch_array($allTables);
                     
                     $PNfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, pntickets.ticket_id, pntickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN pntickets ON '. $_GET['filter'] .'Filter.pool = pntickets.pool WHERE '. $_GET['filter'] .'Filter.visp = "PN"');
                     $JLPfilter = $conn->query('SELECT '. $_GET['filter'] .'Filter.pool, '. $_GET['filter'] .'Filter.amber_kpi, '. $_GET['filter'] .'Filter.red_kpi, jlptickets.ticket_id, jlptickets.last_touched FROM '. $_GET['filter'] .'Filter LEFT JOIN jlptickets ON '. $_GET['filter'] .'Filter.pool = jlptickets.pool WHERE '. $_GET['filter'] .'Filter.visp = "JLP"');
-            
+                    
+                    $conn->close();
+                    
                     ?>        
-                    <table width="100%">
+                    <table width="100%" id="PN-Table">
                         <thead>
                             <tr>
                                 <td class="main-table-header">Oldest Ticket Report PN</td>
@@ -100,7 +102,7 @@ $allTables = mysqli_fetch_array($allTables);
                             </tbody>
                         </thead>
                     </table>
-                    <table width="100%">
+                    <table width="100%" id="JLP-Table">
                         <thead>
                             <tr>
                                 <td class="main-table-header">Oldest Ticket Report JLP</td>
@@ -136,6 +138,7 @@ $allTables = mysqli_fetch_array($allTables);
             ?>
         </div><!-- END of page wrapper -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="scripts/jquery.tablesorter.min.js"></script>
         <script src="scripts/main.js"></script>
     </body>
 </html>

@@ -26,4 +26,6 @@
       
   });
   
+  $("#JLP-Table").tablesorter();
+  
 })();
