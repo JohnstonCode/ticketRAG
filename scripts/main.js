@@ -27,5 +27,6 @@
   });
   
   $("#JLP-Table").tablesorter({ headers: { 1:{sorter:false} } });
+  $("#PN-Table").tablesorter({ headers: { 1:{sorter:false} } });
   
 })();

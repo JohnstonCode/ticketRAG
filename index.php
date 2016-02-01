@@ -79,11 +79,11 @@ $allTables = mysqli_fetch_array($allTables);
                                 <th class="main-table-header">Oldest Ticket Report PN</th>
                             </tr>
                             <tr>
-                                <td>Pool</td>
-                                <td>Ticket ID</td>
-                                <td>Last Touched</td>
-                                <td>Age (Hours)</td>
-                                <td>Color</td>
+                                <th>Pool</th>
+                                <th>Ticket ID</th>
+                                <th>Last Touched</th>
+                                <th>Age (Hours)</th>
+                                <th>Color</th>
                             </tr>
                             <tbody>
                                 <?php
