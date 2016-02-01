@@ -26,6 +26,6 @@
       
   });
   
-  $("#JLP-Table").tablesorter();
+  $("#JLP-Table").tablesorter({ headers: { 1:{sorter:false} } });
   
 })();

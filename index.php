@@ -76,7 +76,7 @@ $allTables = mysqli_fetch_array($allTables);
                     <table width="100%" id="PN-Table">
                         <thead>
                             <tr>
-                                <td class="main-table-header">Oldest Ticket Report PN</td>
+                                <th class="main-table-header">Oldest Ticket Report PN</th>
                             </tr>
                             <tr>
                                 <td>Pool</td>
@@ -108,11 +108,11 @@ $allTables = mysqli_fetch_array($allTables);
                                 <td class="main-table-header">Oldest Ticket Report JLP</td>
                             </tr>
                             <tr>
-                                <td>Pool</td>
-                                <td>Ticket ID</td>
-                                <td>Last Touched</td>
-                                <td>Age (Hours)</td>
-                                <td>Color</td>
+                                <th>Pool</th>
+                                <th>Ticket ID</th>
+                                <th>Last Touched</th>
+                                <th>Age (Hours)</th>
+                                <th>Color</th>
                             </tr>
                             <tbody>
                                 <?php
