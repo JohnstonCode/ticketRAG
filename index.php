@@ -15,7 +15,7 @@ function hoursDiff($ticketAge)
     
     $minutes = floor(($diff%3600)/60);
     
-    return $hours . ':' . $minutes;
+    return abs($hours) . ':' . abs($minutes);
     }
     else
     {
@@ -73,17 +73,17 @@ $allTables = mysqli_fetch_array($allTables);
                     $conn->close();
                     
                     ?>        
-                    <table width="100%" id="PN-Table">
+                    <table width="100%" style="margin-top: 50px;" id="PN-Table">
                         <thead>
                             <tr>
-                                <th class="main-table-header">Oldest Ticket Report PN</th>
+                                <th class="main-table-header" style="font-size: 20px;">Oldest Ticket Report PN</th>
                             </tr>
                             <tr>
                                 <th>Pool</th>
-                                <th>Ticket ID</th>
-                                <th>Last Touched</th>
-                                <th>Age (Hours)</th>
-                                <th>Color</th>
+                                <th style="cursor: pointer;">Ticket ID</th>
+                                <th style="cursor: pointer;">Last Touched</th>
+                                <th style="cursor: pointer;">Age (Hours)</th>
+                                <th style="cursor: pointer;">Color</th>
                             </tr>
                             <tbody>
                                 <?php
@@ -102,10 +102,10 @@ $allTables = mysqli_fetch_array($allTables);
                             </tbody>
                         </thead>
                     </table>
-                    <table width="100%" id="JLP-Table">
+                    <table width="100%" style="margin-top: 50px;" id="JLP-Table">
                         <thead>
                             <tr>
-                                <td class="main-table-header">Oldest Ticket Report JLP</td>
+                                <td class="main-table-header" style="font-size: 20px;">Oldest Ticket Report JLP</td>
                             </tr>
                             <tr>
                                 <th>Pool</th>
