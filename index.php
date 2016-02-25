@@ -15,6 +15,11 @@ function hoursDiff($ticketAge)
     
     $minutes = floor(($diff%3600)/60);
     
+    if($minutes < 10)
+    {
+        $minutes = sprintf("%02d", $minutes);
+    }
+    
     return abs($hours) . ':' . abs($minutes);
     }
     else

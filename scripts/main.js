@@ -27,7 +27,7 @@
   });
   
   $.tablesorter.addParser({
-        id: 'fancyNumber',
+        id: 'hourSort',
         is:function(s){return false;},
         format: function(s) {return s.replace(":", "");},
         type: 'numeric'
@@ -36,7 +36,7 @@
   $("#JLP-Table").tablesorter({ headers: { 1:{sorter:false} } });
   $("#PN-Table").tablesorter({
     headers: { 
-        3:{ sorter:'fancyNumber'},
+        3:{ sorter:'hourSort'},
         1:{ sorter: false}
     } 
   });

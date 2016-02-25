@@ -32,7 +32,7 @@ $allTables = mysqli_fetch_array($allTables);
         </section>
         <section>
             <form action="removeFilter.php" method="POST">
-                Select filter to delete: <select onChange="window.location='settings.php?filter='+this.value">
+                Select filter to delete: <select>
                     <option></option>
                     <?php
                     for($i = 0; $i < count($allTables) - 1; $i++)
