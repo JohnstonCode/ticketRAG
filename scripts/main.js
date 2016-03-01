@@ -27,17 +27,25 @@
   });
   
   $.tablesorter.addParser({
-        id: 'hourSort',
-        is:function(s){return false;},
-        format: function(s) {return s.replace(":", "");},
-        type: 'numeric'
-    });
+    id: 'hourSort',
+    is:function(s){return false;},
+    format: function(s) {return s.replace(":", "");},
+    type: 'numeric'
+  });
+  
+  $.tablesorter.addParser({
+    id: 'colorSort',
+    is:function(s){return false;},
+    format: function(s) {return s.toLowerCase().replace("green" , 2).replace("amber" , 1).replace("red" , 0);},
+    type: 'numeric'
+  });
   
   $("#JLP-Table").tablesorter({ headers: { 1:{sorter:false} } });
   $("#PN-Table").tablesorter({
     headers: { 
-        3:{ sorter:'hourSort'},
-        1:{ sorter: false}
+      0:{ sorter: false},
+      3:{ sorter:'hourSort'},
+      4:{ sorter:'colorSort'}
     } 
   });
   
