@@ -36,7 +36,7 @@
   $.tablesorter.addParser({
     id: 'colorSort',
     is:function(s){return false;},
-    format: function(s) {return s.toLowerCase().replace("green" , 2).replace("amber" , 1).replace("red" , 0);},
+    format: function(s) {return s.toLowerCase().replace("green" , 3).replace("amber" , 2).replace("red" , 1);},
     type: 'numeric'
   });
   
@@ -46,7 +46,7 @@
       0:{ sorter: false},
       3:{ sorter:'hourSort'},
       4:{ sorter:'colorSort'}
-    } 
+    }
   });
   
 })();
