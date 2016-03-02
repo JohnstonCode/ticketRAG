@@ -9,9 +9,9 @@
     var checkboxes = $('input[type="checkbox"]');
     for (var i=0; i<checkboxes.length; i++) {
        if (checkboxes[i].checked) {
-          filters.push(checkboxes[i]['name']);
-          filters.push($('input[name="'+ checkboxes[i]['name'] +'-amber-kpi"]').val());
-          filters.push($('input[name="'+ checkboxes[i]['name'] +'-red-kpi"]').val());
+          filters.push(checkboxes[i].name);
+          filters.push($('input[name="'+ checkboxes[i].name +'-amber-kpi"]').val());
+          filters.push($('input[name="'+ checkboxes[i].name +'-red-kpi"]').val());
        }
     }
     return filters;
@@ -22,7 +22,7 @@
     var data = JSON.stringify(getCheckedBoxes());
     
     $('#test').val(data);
-    document.forms["filter"].submit();
+    document.forms.filter.submit();
       
   });
   
