@@ -81,7 +81,7 @@ $allTables = mysqli_fetch_array($allTables);
                     $conn->close();
                     
                     ?>        
-                    <table width="100%" style="margin-top: 50px;" id="PN-Table">
+                    <table width="100%" style="margin-top: 50px;" class="sort-table">
                         <thead>
                             <tr>
                                 <th class="main-table-header" style="font-size: 20px;">Oldest Ticket Report PN</th>
@@ -110,7 +110,7 @@ $allTables = mysqli_fetch_array($allTables);
                             </tbody>
                         </thead>
                     </table>
-                    <table width="100%" style="margin-top: 50px;" id="JLP-Table">
+                    <table width="100%" style="margin-top: 50px;" class="sort-table">
                         <thead>
                             <tr>
                                 <td class="main-table-header" style="font-size: 20px;">Oldest Ticket Report JLP</td>

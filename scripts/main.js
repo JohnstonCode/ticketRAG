@@ -36,17 +36,16 @@
   $.tablesorter.addParser({
     id: 'colorSort',
     is:function(s){return false;},
-    format: function(s) {return s.toLowerCase().replace("green" , 3).replace("amber" , 2).replace("red" , 1);},
+    format: function(s) {return s.toLowerCase().replace("green" , 1).replace("amber" , 2).replace("red" , 3);},
     type: 'numeric'
   });
   
-  $("#JLP-Table").tablesorter({ headers: { 1:{sorter:false} } });
-  $("#PN-Table").tablesorter({
+  $(".sort-table").tablesorter({
     headers: { 
-      0:{ sorter: false},
       3:{ sorter:'hourSort'},
-      4:{ sorter:'colorSort'}
+      4:{ sorter: 'colorSort'}
     }
+
   });
   
 })();
