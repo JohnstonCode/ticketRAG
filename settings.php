@@ -31,8 +31,8 @@ $allTables = mysqli_fetch_array($allTables);
             </form>
         </section>
         <section>
-            <form action="removeFilter.php" method="POST">
-                Select filter to delete: <select>
+            <form action="removeFilter.php" method="POST" name="removeFilter">
+                Select filter to delete: <select id="removeFilterSelect">
                     <option></option>
                     <?php
                     for($i = 0; $i < count($allTables) - 1; $i++)

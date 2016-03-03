@@ -55,7 +55,8 @@ class CSV
         
         if($conn->query($sql) === TRUE)
         {
-            echo 'New records added successfully </br>';
+            header("Location: /");
+            die();
         }
         else 
         {

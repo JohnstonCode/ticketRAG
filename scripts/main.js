@@ -17,6 +17,8 @@
     return filters;
   }
   
+  
+  //submites only selected filters
   $('#settings-button').on('click', function(){
     
     var data = JSON.stringify(getCheckedBoxes());
@@ -26,6 +28,7 @@
       
   });
   
+  //validates filter
   $('#create-filter').on('click', function(){
     
     var filterName = $("input[name='filter-name']").val();
@@ -34,6 +37,21 @@
       document.forms.createFilter.submit();
     }else {
       $("input[name='filter-name']").next().after('<br /><span style="color: red;">Please enter a filter name.</span>');
+    }
+    
+    return false
+    
+  });
+  
+  //validates remove filter
+  $("input[value='Remove Filter']").on('click', function(){
+    
+    var removeFilterName = $('#removeFilterSelect').val();
+    
+    if(removeFilterName){
+      document.forms.removeFilter.submit();
+    }else {
+      $(this).after('<br /><span style="color: red;">Please select a filter to remove.</span>');
     }
     
     return false
