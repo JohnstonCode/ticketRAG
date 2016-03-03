@@ -26,6 +26,20 @@
       
   });
   
+  $('#create-filter').on('click', function(){
+    
+    var filterName = $("input[name='filter-name']").val();
+    
+    if(filterName){
+      document.forms.createFilter.submit();
+    }else {
+      $("input[name='filter-name']").next().after('<br /><span style="color: red;">Please enter a filter name.</span>');
+    }
+    
+    return false
+    
+  });
+  
   $.tablesorter.addParser({
     id: 'hourSort',
     is:function(s){return false;},

@@ -25,9 +25,9 @@ $allTables = mysqli_fetch_array($allTables);
             </form>
         </section>
         <section>
-            <form action="createFilter.php" method="POST">
+            <form action="createFilter.php" method="POST" name="createFilter">
                 Filter Name: <input type="text" name="filter-name"/>
-                <input type="submit" value="Create Filter"/>
+                <input type="submit" value="Create Filter" id="create-filter"/>
             </form>
         </section>
         <section>
