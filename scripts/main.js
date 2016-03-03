@@ -28,6 +28,21 @@
       
   });
   
+  //validates file upload
+  $("input[value='Upload']").on('click', function(){
+    
+    var report = $("input[name='report']").val();
+    
+    if(report){
+      document.forms.uploadReport.submit();
+    }else {
+      $(this).after('<br /><span style="color: red;">Please select a file.</span>');
+    }
+    
+    return false
+    
+  });
+  
   //validates filter
   $('#create-filter').on('click', function(){
     

@@ -19,7 +19,7 @@ $allTables = mysqli_fetch_array($allTables);
     <body>
         <a href="/">Home</a>
         <section>
-            <form action="upload.php" method="post" enctype="multipart/form-data">
+            <form action="upload.php" method="post" enctype="multipart/form-data" name="uploadReport">
                 Select NOC report: <input type="file" name="report">
                 <input type="submit" value="Upload" name="submit">
             </form>
