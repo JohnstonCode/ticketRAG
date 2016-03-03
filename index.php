@@ -36,6 +36,7 @@ $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
 
 $allTables = mysqli_fetch_array($allTables);
 
+
 ?>
 <!DOCTYPE html>
 <html>

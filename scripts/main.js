@@ -7,7 +7,7 @@
   
   function getCheckedBoxes() {
     var checkboxes = $('input[type="checkbox"]');
-    for (var i=0; i<checkboxes.length; i++) {
+    for (var i= 0; i < checkboxes.length; i++) {
        if (checkboxes[i].checked) {
           filters.push(checkboxes[i].name);
           filters.push($('input[name="'+ checkboxes[i].name +'-amber-kpi"]').val());
