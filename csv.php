@@ -1,7 +1,14 @@
 <?php
+
 class CSV
 {
-
+    
+    public function __construct($conn)
+    {
+      
+      $this->conn = $conn;
+      
+    }  
     
     public function convertCSV()
     {
@@ -40,37 +47,36 @@ class CSV
     
     public function moveToDB($data, $table)
     {
-        $conn = new mysqli('localhost', 'root', '', 'rag');
         
-        $conn->query('TRUNCATE TABLE ' . $table);
+        $this->conn->query('TRUNCATE TABLE ' . $table);
         
         date_default_timezone_set('GMT');
         $currentTime = date("h:i");
       
         $updateTime = "UPDATE updateTime SET updated_at = '". $currentTime ."'";
       
-        $conn->query($updateTime);
+        $this->conn->query($updateTime);
       
         for($i = 0; $i < count($data); $i++)
         {
             $sql = "INSERT INTO ".$table." (pool, ticket_id, last_touched) 
             VALUES('".$data[$i][0]."', '".$data[$i][1]."', '".$data[$i][2]."')";
             
-            $conn->query($sql);
+            $this->conn->query($sql);
             
         }
         
-        if($conn->query($sql) === TRUE)
+        if($this->conn->query($sql) === TRUE)
         {
             header("Location: /");
             die();
         }
         else 
         {
-            echo 'Error: ' . $sql . '</br>' . $conn->error . '</br>';
+            echo 'Error: ' . $sql . '</br>' . $this->conn->error . '</br>';
         }
         
-        $conn->close();
+        $this->conn->close();
         
     }
     
