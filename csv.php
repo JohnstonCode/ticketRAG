@@ -44,6 +44,13 @@ class CSV
         
         $conn->query('TRUNCATE TABLE ' . $table);
         
+        date_default_timezone_set('GMT');
+        $currentTime = date("h:i");
+      
+        $updateTime = "UPDATE updateTime SET updated_at = '". $currentTime ."'";
+      
+        $conn->query($updateTime);
+      
         for($i = 0; $i < count($data); $i++)
         {
             $sql = "INSERT INTO ".$table." (pool, ticket_id, last_touched) 

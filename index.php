@@ -36,6 +36,10 @@ $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
 
 $allTables = mysqli_fetch_array($allTables);
 
+$updatedAt = $conn->query('SELECT * from updateTime');
+
+$updatedAt = $updatedAt->fetch_array(MYSQLI_ASSOC);
+
 
 ?>
 <!DOCTYPE html>
@@ -60,6 +64,7 @@ $allTables = mysqli_fetch_array($allTables);
                     }
                     ?>
                 </select>
+                <br/><span>Last updated at:<?php echo $updatedAt['updated_at']; ?></span>
             </header>
             <?php
             
