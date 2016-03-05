@@ -40,6 +40,8 @@ $updatedAt = $conn->query('SELECT * from updateTime');
 
 $updatedAt = $updatedAt->fetch_array(MYSQLI_ASSOC);
 
+$updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
+
 
 ?>
 <!DOCTYPE html>
