@@ -2,6 +2,8 @@
 
 class CSV
 {
+  
+    private $conn;
     
     public function __construct($conn)
     {
