@@ -1,5 +1,10 @@
 <?php
 require_once('connect.php');
+
+session_start();
+
+
+
 function hoursDiff($ticketAge)
 {
     if($ticketAge != '')
@@ -55,6 +60,19 @@ $updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
     </head>
     <body>
         <div id="page-wrapper">
+            <?php 
+              if(isset($_SESSION['success']))
+              {
+                echo '<div class="alert-box success">'. $_SESSION['success'] .'</div>';
+                unset($_SESSION['success']);
+              }
+
+              if(isset($_SESSION['failure']))
+              {
+                echo '<div class="alert-box failure">'. $_SESSION['failure'] .'</div>';
+                unset($_SESSION['failure']);
+              }
+            ?>
             <header>
                 <a href="settings.php">Settings</a></br>
                 <span>Last updated at: <?php echo $updatedAt['updated_at']; ?></span>

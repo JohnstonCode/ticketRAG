@@ -1,6 +1,8 @@
 <?php
 require_once('connect.php');
 
+session_start();
+
 $filterName = $_POST['filter-name'];
 
 if($filterName != '')
@@ -13,10 +15,17 @@ if($filterName != '')
   red_kpi INT(2)
   )";
 
-  if ($conn->query($sql) === TRUE) {
-      echo "Filter ". $filterName ." created successfully";
-  } else {
-      echo "Error creating table: " . $conn->error;
+  if ($conn->query($sql) === TRUE) 
+  {
+      $_SESSION['success'] = "Created filter";
+      header('Location: settings.php');
+      die();
+  } 
+  else 
+  {
+      $_SESSION['failure'] = "Error creating filter";
+      header('Location: settings.php');
+      die();
   }
 
   $conn->close();

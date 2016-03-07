@@ -2,10 +2,16 @@
 require_once('pools.php');
 require_once('connect.php');
 
+session_start();
+
 $allTables = $conn->query('SHOW TABLES LIKE "%Filter"');
 
-$allTables = mysqli_fetch_array($allTables);
+$filters = [];
 
+while($allFilters = mysqli_fetch_array($allTables))
+{
+	$filters[] = $allFilters[0];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,9 +24,21 @@ $allTables = mysqli_fetch_array($allTables);
     </head>
     <body>
         <div id="settings-container">
-          <nav id="settings-nav">
-              <a href="/">Home</a>
-          </nav>
+          <?php 
+          if(isset($_SESSION['success']))
+          {
+            echo '<div class="alert-box success">'. $_SESSION['success'] .'</div>';
+            unset($_SESSION['success']);
+          }
+            
+          if(isset($_SESSION['failure']))
+          {
+            echo '<div class="alert-box failure">'. $_SESSION['failure'] .'</div>';
+            unset($_SESSION['failure']);
+          }
+
+          ?>
+          <a href="/">Home</a>
           <fieldset>
               <legend>Upload</legend>
               <form action="upload.php" method="post" enctype="multipart/form-data" name="uploadReport">
@@ -34,13 +52,13 @@ $allTables = mysqli_fetch_array($allTables);
                   Filter Name: <input type="text" name="filter-name"/>
                   <input type="submit" value="Create Filter" id="create-filter" class="buttons"/>
               </form>
-              <form action="removeFilter.php" method="POST" name="removeFilter">
-                  Select filter to delete: <select id="removeFilterSelect">
+              <form action="deleteFilter.php" method="POST" name="removeFilter">
+                  Select filter to delete: <select id="removeFilterSelect" name="filter-to-remove">
                       <option></option>
                       <?php
-                      for($i = 0; $i < count($allTables) - 1; $i++)
+                      for($i = 0; $i < count($filters); $i++)
                       {
-                          echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+                          echo '<option value="'. str_replace("Filter", "", $filters[$i]) .'">'. str_replace("Filter", "", $filters[$i]). '</option>';
                       }
                       ?>
                   </select>
@@ -52,9 +70,9 @@ $allTables = mysqli_fetch_array($allTables);
           Select filter: <select onChange="window.location='settings.php?filter='+this.value">
               <option></option>
               <?php
-              for($i = 0; $i < count($allTables) - 1; $i++)
+              for($i = 0; $i < count($filters); $i++)
               {
-                  echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+                  echo '<option value="'. str_replace("Filter", "", $filters[$i]) .'">'. str_replace("Filter", "", $filters[$i]). '</option>';
               }
               ?>
           </select>

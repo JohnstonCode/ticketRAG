@@ -3,6 +3,9 @@
   $('td:contains("Amber")').css('color', 'orange');
   $('td:contains("Red")').css('color', 'red');
   
+  $( "div.success" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+  $( "div.failure" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+  
   var filters = [];
   
   function getCheckedBoxes() {

@@ -3,7 +3,7 @@
 class CSV
 {
   
-    private $conn = null;
+    private $conn;
     
     public function __construct($conn)
     {
@@ -68,14 +68,13 @@ class CSV
             
         }
         
-        if($this->conn->query($sql) === TRUE)
+        if($this->conn->query($sql) === true)
         {
-            header("Location: /");
-            die();
+            return true;
         }
-        else 
+        else
         {
-            echo 'Error: ' . $sql . '</br>' . $this->conn->error . '</br>';
+            return false;
         }
         
         $this->conn->close();

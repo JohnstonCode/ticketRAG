@@ -3,6 +3,8 @@
    require_once('csv.php');
    require_once('connect.php');
 
+   session_start();
+
    if(isset($_FILES['report'])){
       $errors= array();
       $file_name = $_FILES['report']['name'];
@@ -20,10 +22,17 @@
          move_uploaded_file($file_tmp,"uploads/".$file_name);
          $csv = new CSV($conn);
          $reports = $csv->convertCSV();
-         $csv->moveToDB($reports[0], 'pntickets');
-         $csv->moveToDB($reports[1], 'jlptickets');
-      }else{
-         print_r($errors);
+        
+         if($csv->moveToDB($reports[0], 'pntickets') == true && $csv->moveToDB($reports[1], 'jlptickets') == true)
+         {
+            $_SESSION['success'] = "File uploaded";
+            header('Location: settings.php');
+         }
+      }
+      else
+      {
+         $_SESSION['failure'] = "Error uploading file";
+         header('Location: settings.php');
       }
    }
 ?>
