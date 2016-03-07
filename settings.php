@@ -17,42 +17,48 @@ $allTables = mysqli_fetch_array($allTables);
         <title>Ticket RAG | Settings</title>
     </head>
     <body>
-        <a href="/">Home</a>
-        <section>
-            <form action="upload.php" method="post" enctype="multipart/form-data" name="uploadReport">
-                Select NOC report: <input type="file" name="report">
-                <input type="submit" value="Upload" name="submit">
-            </form>
-        </section>
-        <section>
-            <form action="createFilter.php" method="POST" name="createFilter">
-                Filter Name: <input type="text" name="filter-name"/>
-                <input type="submit" value="Create Filter" id="create-filter"/>
-            </form>
-        </section>
-        <section>
-            <form action="removeFilter.php" method="POST" name="removeFilter">
-                Select filter to delete: <select id="removeFilterSelect">
-                    <option></option>
-                    <?php
-                    for($i = 0; $i < count($allTables) - 1; $i++)
-                    {
-                        echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
-                    }
-                    ?>
-                </select>
-                <input type="submit" value="Remove Filter"/>
-            </form>
-        </section>
-        Select filter to edit: <select onChange="window.location='settings.php?filter='+this.value">
-            <option></option>
-            <?php
-            for($i = 0; $i < count($allTables) - 1; $i++)
-            {
-                echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
-            }
-            ?>
-        </select>
+        <div id="settings-container">
+          <a href="/">Home</a>
+          
+          <fieldset>
+              <legend>Upload</legend>
+              <form action="upload.php" method="post" enctype="multipart/form-data" name="uploadReport">
+                  Select NOC report: <input type="file" name="report">
+                  <input type="submit" value="Upload" name="submit">
+              </form>
+          </fieldset>
+          <fieldset>
+              <legend>Filters</legend>
+              <form action="createFilter.php" method="POST" name="createFilter">
+                  Filter Name: <input type="text" name="filter-name"/>
+                  <input type="submit" value="Create Filter" id="create-filter"/>
+              </form>
+              <form action="removeFilter.php" method="POST" name="removeFilter">
+                  Select filter to delete: <select id="removeFilterSelect">
+                      <option></option>
+                      <?php
+                      for($i = 0; $i < count($allTables) - 1; $i++)
+                      {
+                          echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+                      }
+                      ?>
+                  </select>
+                  <input type="submit" value="Remove Filter"/>
+              </form>
+          </fieldset>
+          <fieldset>
+              <legend>Edit filter:</legend>
+          Select filter: <select onChange="window.location='settings.php?filter='+this.value">
+              <option></option>
+              <?php
+              for($i = 0; $i < count($allTables) - 1; $i++)
+              {
+                  echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+              }
+              ?>
+          </select>
+          </fieldset>
+        </div>
         <?php
                     
         if(isset($_GET['filter']))

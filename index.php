@@ -66,7 +66,7 @@ $updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
                     }
                     ?>
                 </select>
-                <br/><span>Last updated at:<?php echo $updatedAt['updated_at']; ?></span>
+                <br/><span>Last updated at: <?php echo $updatedAt['updated_at']; ?></span>
             </header>
             <?php
             

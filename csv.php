@@ -3,7 +3,7 @@
 class CSV
 {
   
-    private $conn;
+    private $conn = null;
     
     public function __construct($conn)
     {
