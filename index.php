@@ -57,16 +57,19 @@ $updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
         <div id="page-wrapper">
             <header>
                 <a href="settings.php">Settings</a></br>
-                Select filter to edit: <select onChange="window.location='?filter='+this.value">
-                    <option></option>
-                    <?php
-                    for($i = 0; $i < count($allTables) - 1; $i++)
-                    {
-                        echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
-                    }
-                    ?>
-                </select>
-                <br/><span>Last updated at: <?php echo $updatedAt['updated_at']; ?></span>
+                <span>Last updated at: <?php echo $updatedAt['updated_at']; ?></span>
+                <fieldset>
+                    <legend>Filter</legend>
+                    Select filter: <select onChange="window.location='?filter='+this.value">
+                        <option></option>
+                        <?php
+                        for($i = 0; $i < count($allTables) - 1; $i++)
+                        {
+                            echo '<option value="'. str_replace("Filter", "", $allTables[$i]) .'">'. str_replace("Filter", "", $allTables[$i]). '</option>';
+                        }
+                        ?>
+                    </select>
+                </fieldset>
             </header>
             <?php
             

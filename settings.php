@@ -18,20 +18,21 @@ $allTables = mysqli_fetch_array($allTables);
     </head>
     <body>
         <div id="settings-container">
-          <a href="/">Home</a>
-          
+          <nav id="settings-nav">
+              <a href="/">Home</a>
+          </nav>
           <fieldset>
               <legend>Upload</legend>
               <form action="upload.php" method="post" enctype="multipart/form-data" name="uploadReport">
                   Select NOC report: <input type="file" name="report">
-                  <input type="submit" value="Upload" name="submit">
+                  <input type="submit" value="Upload" name="submit" class="buttons">
               </form>
           </fieldset>
           <fieldset>
               <legend>Filters</legend>
               <form action="createFilter.php" method="POST" name="createFilter">
                   Filter Name: <input type="text" name="filter-name"/>
-                  <input type="submit" value="Create Filter" id="create-filter"/>
+                  <input type="submit" value="Create Filter" id="create-filter" class="buttons"/>
               </form>
               <form action="removeFilter.php" method="POST" name="removeFilter">
                   Select filter to delete: <select id="removeFilterSelect">
@@ -43,7 +44,7 @@ $allTables = mysqli_fetch_array($allTables);
                       }
                       ?>
                   </select>
-                  <input type="submit" value="Remove Filter"/>
+                  <input type="submit" value="Remove Filter" class="buttons"/>
               </form>
           </fieldset>
           <fieldset>
