@@ -38,7 +38,7 @@ while($allFilters = mysqli_fetch_array($allTables))
           }
 
           ?>
-          <a href="/">Home</a>
+          <a href="/" class="nav-link">Home</a><br />
           <fieldset>
               <legend>Upload</legend>
               <form action="upload.php" method="post" enctype="multipart/form-data" name="uploadReport">

@@ -64,6 +64,16 @@ fieldset {
     display: none;
 }
 
+.nav-link {
+	font-size: 20px;
+	display: block;
+	color: gray;
+}
+
+.nav-link:hover {
+	color: #c81e6e;
+}
+
 
 
 

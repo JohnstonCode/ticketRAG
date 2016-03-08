@@ -74,7 +74,7 @@ $updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
               }
             ?>
             <header>
-                <a href="settings.php">Settings</a></br>
+                <a href="settings.php" class="nav-link">Update</a></br>
                 <span>Last updated at: <?php echo $updatedAt['updated_at']; ?></span>
                 <fieldset>
                     <legend>Filter</legend>
@@ -128,7 +128,7 @@ $updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
                                 ?>
                                 <tr>
                                     <td><?php echo $row['pool']?></td>
-                                    <td><?php if($row['ticket_id'] == ''){ echo 'Clear!'; }else { echo $row['ticket_id']; } ?></td>
+                                    <td><?php if($row['ticket_id'] == ''){ echo 'Clear!'; }else { echo '<a href="https://workplace.plus.net/tickets/ticket_show.html?ticket_id='. $row['ticket_id'] .'" target="_NEW">'.   $row['ticket_id'].'</a>'; } ?></td>
                                     <td><?php if($row['last_touched'] != ''){ echo $row['last_touched']; } ?></td>
                                     <td><?php if($row['last_touched'] != ''){ echo hoursDiff($row['last_touched']); } ?></td>
                                     <td><?php if(hoursDiff($row['last_touched']) < intval($row['amber_kpi'])){ echo 'Green'; }elseif(hoursDiff($row['last_touched']) < intval($row['red_kpi'])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
@@ -157,7 +157,7 @@ $updatedAt['updated_at'] = rtrim($updatedAt['updated_at'], ':00');
                                 ?>
                                 <tr>
                                     <td><?php echo $row['pool']?></td>
-                                    <td><?php if($row['ticket_id'] == ''){ echo 'Clear!'; }else { echo $row['ticket_id']; } ?></td>
+                                    <td><?php if($row['ticket_id'] == ''){ echo 'Clear!'; }else { echo '<a href="https://workplace.plus.net/tickets/ticket_show.html?ticket_id='. $row['ticket_id'] .'" target="_NEW">'.   $row['ticket_id'].'</a>'; } ?></td>
                                     <td><?php if($row['last_touched'] != ''){ echo $row['last_touched']; } ?></td>
                                     <td><?php if($row['last_touched'] != ''){ echo hoursDiff($row['last_touched']); } ?></td>
                                     <td><?php if(hoursDiff($row['last_touched']) < intval($row['amber_kpi'])){ echo 'Green'; }elseif(hoursDiff($row['last_touched']) < intval($row['red_kpi'])){ echo 'Amber'; }else { echo 'Red'; } ?></td>
