@@ -77,18 +77,10 @@ while($allFilters = mysqli_fetch_array($allTables))
               ?>
           </select>
           </fieldset>
-        </div>
         <?php
                     
         if(isset($_GET['filter']))
         {
-            
-            $filters = [];
-
-            foreach($allTables as $value)
-            {
-                $filters[] = $value;
-            }
             
             if (in_array($_GET['filter'] . 'Filter', $filters))
             {
@@ -176,6 +168,7 @@ while($allFilters = mysqli_fetch_array($allTables))
             }
         }
         ?>
+				</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="scripts/main.js"></script>
     </body>

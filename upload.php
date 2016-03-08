@@ -26,7 +26,7 @@
          if($csv->moveToDB($reports[0], 'pntickets') == true && $csv->moveToDB($reports[1], 'jlptickets') == true)
          {
             $_SESSION['success'] = "File uploaded";
-            header('Location: settings.php');
+            header('Location: index.php');
          }
       }
       else

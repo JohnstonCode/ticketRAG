@@ -2,6 +2,8 @@
 require_once('connect.php');
 require_once('pools.php');
 
+session_start();
+
 $filter = array_keys($_POST);
 $filter = $filter[0];
 
@@ -51,10 +53,6 @@ for($i = 0; $i < count($filters['pool']); $i++)
     }
 }
 
-var_dump($JLPpools);
-var_dump($JLPamberKpi);
-var_dump($JLPredKpi);
-
 $conn->query('TRUNCATE TABLE ' . $filter . 'Filter');
 
 for($i = 0; $i < count($PNpools); $i++)
@@ -62,12 +60,9 @@ for($i = 0; $i < count($PNpools); $i++)
     $sql = "INSERT INTO ".$filter."Filter (visp, pool, amber_kpi, red_kpi) 
     VALUES('PN', '".$PNpools[$i]."', '".$PNamberKpi[$i]."', '".$PNredKpi[$i]."')";
     
-    if ($conn->query($sql) === TRUE) 
+    if ($conn->query($sql) === FALSE) 
     {
-        echo "New record created successfully";
-    } else 
-    {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        die("Error: " . $sql . "<br>" . $conn->error);
     }
 
 }
@@ -77,14 +72,15 @@ for($i = 0; $i < count($JLPpools); $i++)
     $sql = "INSERT INTO ".$filter."Filter (visp, pool, amber_kpi, red_kpi) 
     VALUES('JLP', '".$JLPpools[$i]."', '".$JLPamberKpi[$i]."', '".$JLPredKpi[$i]."')";
     
-    if ($conn->query($sql) === TRUE) 
+    if ($conn->query($sql) === FALSE) 
     {
-        echo "New record created successfully";
-    } else 
-    {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        die("Error: " . $sql . "<br>" . $conn->error);
+        
     }
 
 }
+
+$_SESSION['success'] = "Filter updated";
+header('Location: index.php');
 
 $conn->close();

@@ -1,6 +1,11 @@
+html, body {
+	height: 100%;
+}
+
 #page-wrapper {
     max-width: 1000px;
     margin: 0 auto;
+		height: 100%;
 }
 
 td {
@@ -11,6 +16,7 @@ td {
 #settings-container {
   max-width: 1000px;
   margin: 0 auto;
+	height: 100%;
 }
 
 .buttons {
@@ -57,6 +63,8 @@ fieldset {
     border-color: #ebccd1;
     display: none;
 }
+
+
 
 
 
